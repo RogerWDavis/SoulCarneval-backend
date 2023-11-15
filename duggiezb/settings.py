@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'duggiez-backend.urls'
+ROOT_URLCONF = 'duggiezb.urls'
 
 TEMPLATES = [
     {
@@ -81,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'duggiez-backend.wsgi.application'
+WSGI_APPLICATION = 'duggiezb.wsgi.application'
 
 
 # Database
