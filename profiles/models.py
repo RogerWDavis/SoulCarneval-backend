@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
-# Create your models here.
 class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -10,12 +9,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
 
-    # FileField for generic file uploads (e.g., images, audio, video)
-    media_file = models.FileField(upload_to='media/', blank=True)
-
-    # Additional fields for specific file types
-    audio_file = models.FileField(upload_to='audio/', blank=True)
-    video_file = models.FileField(upload_to='video/', blank=True)
+    # ImageField for image uploads
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
 
     class Meta:
         ordering = ['created_at']
