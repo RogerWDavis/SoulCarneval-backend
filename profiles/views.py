@@ -1,29 +1,41 @@
-from django.http import Http404
-from rest_framework import generics, status
-from rest_framework.response import Response
+from django.db.models import Count
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from duggiezb.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
-from duggiezb.permissions import IsOwnerOrReadOnly
+
 
 class ProfileList(generics.ListAPIView):
-    queryset = Profile.objects.all()
+   
+    queryset = Profile.objects.annotate(
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__followed', distinct=True),
+        following_count=Count('owner__following', distinct=True)
+    ).order_by('-created_at')
     serializer_class = ProfileSerializer
+    filter_backends = [
+        filters.OrderingFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'owner__following__followed__profile',
+    ]
+    ordering_fields = [
+        'posts_count',
+        'followers_count',
+        'following_count',
+        'owner__following__created_at',
+        'owner__followed__created_at',
+    ]
 
-class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
+
+class ProfileDetail(generics.RetrieveUpdateAPIView):
+   
     permission_classes = [IsOwnerOrReadOnly]
-
-    def get_object(self):
-        try:
-            profile = Profile.objects.get(pk=self.kwargs['pk'])
-            self.check_object_permissions(self.request, profile)
-            return profile
-        except Profile.DoesNotExist:
-            raise Http404
-
-    def delete(self, request, *args, **kwargs):
-        profile = self.get_object()
-        self.check_object_permissions(self.request, profile)
-        profile.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    queryset = Profile.objects.annotate(
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__followed', distinct=True),
+        following_count=Count('owner__following', distinct=True)
+    ).order_by('-created_at')
+    serializer_class = ProfileSerializer

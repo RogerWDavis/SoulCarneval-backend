@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
-    'django_filter',
+    'django_filters',
     'posts',
     'comments',
     'likes',
