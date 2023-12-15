@@ -8,11 +8,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
-    media_file = models.FileField(upload_to='media/', blank=True)
-
-    # Additional fields for specific file types
-    audio_file = models.FileField(upload_to='audio/', blank=True)
-    video_file = models.FileField(upload_to='video/', blank=True)
+    image = models.ImageField(upload_to='media/', blank=True)
 
     class Meta:
         ordering = ['-created_at']
