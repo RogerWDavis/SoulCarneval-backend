@@ -11,7 +11,7 @@ CLOUDINARY_STORAGE = {
 }
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 REST_FRAMEWORK = {
@@ -36,6 +36,7 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
+
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'duggiezb.serializers.CurrentUserSerializer'
 }
@@ -52,10 +53,15 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
    os.environ.get('ALLOWED_HOST'),
-   '8000-rogerwdavis-duggiezback-zsz2vdoakl3.ws-eu106.gitpod.io',
-   'localhost'
+   "8000-rogerwdavis-duggiezback-b7mdh42bl8m.ws-eu107.gitpod.io",
+   'localhost',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN')
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -69,7 +75,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'rest_framework',
-    'django_filters',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
@@ -100,13 +105,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
-CORS_ALLOWED_ORIGINS = [
-    os.environ.get('CLIENT_ORIGIN')
-]
-
-
-CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'duggiezb.urls'
 
