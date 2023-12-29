@@ -1,4 +1,4 @@
-![Logo](/docs/logo.jpg)
+![Banner](docs/banner1.PNG)
 # Soul Carneval API Documentation
 
 Welcome to the Soul Carneval API documentation. This readme provides information about the API endpoints and functionalities. For the documentation of the Soul Carneval web app, please visit the following link: [Soul Carneval Repository](https://github.com/RogerWDavis/Soul-Carneval.git).
