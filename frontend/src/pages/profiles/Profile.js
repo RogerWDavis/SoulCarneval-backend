@@ -5,6 +5,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom"; 
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 
 const Profile = (props) => {
@@ -14,7 +15,13 @@ const Profile = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
+  const history = useHistory(); 
   const { handleFollow, handleUnfollow } = useSetProfileData();
+
+  const handleChat = (profile) => {
+    const recipientId = profile.id; 
+    history.push(`/chat/${recipientId}`); 
+  };
 
   return (
     <div
@@ -24,6 +31,7 @@ const Profile = (props) => {
         <Link className="align-self-center" to={`/profiles/${id}`}>
           <Avatar src={profile_image} height={imageSize} />
         </Link>
+        <Button onClick={() => handleChat(profile)}>Chat</Button>
       </div>
       <div className={`mx-2 ${styles.WordBreak}`}>
         <strong>{owner}</strong>
