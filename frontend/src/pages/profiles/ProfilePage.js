@@ -24,7 +24,7 @@ import Post from "../posts/Post";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
-import { useHistory } from "react-router-dom";
+
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -136,11 +136,6 @@ function ProfilePage() {
     </>
   );
 
-  const history = useHistory();
-
-  const handleChat = (profile) => {
-    history.push(`/chat/${profile.id}`);
-  };
 
   return (
     <Row>
