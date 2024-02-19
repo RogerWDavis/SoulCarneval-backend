@@ -49,11 +49,11 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
    os.environ.get('ALLOWED_HOST'),
-   "8000-rogerwdavis-duggiezback-b7mdh42bl8m.ws-eu107.gitpod.io",
+   "8000-rogerwdavis-soulcarneva-b92cwtj5cn2.ws-eu108.gitpod.io",
    'localhost',
 ]
 
@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
+    'reviews',
 
 
 
@@ -136,11 +137,12 @@ DATABASES = {
     'default': ({
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    } if 'DEV' in os.environ else dj_database_url.parse(
+    } if 'DEV_DB' in os.environ else dj_database_url.parse(
         os.environ.get('DATABASE_URL')
     ))
 }
  
+
 
 
 # Password validation

@@ -59,6 +59,14 @@ const NavBar = () => {
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
+      {/* Add View Reviews button */}
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/reviews"
+      >
+        <i className="far fa-comments"></i>View Reviews
+      </NavLink>
     </>
   );
   

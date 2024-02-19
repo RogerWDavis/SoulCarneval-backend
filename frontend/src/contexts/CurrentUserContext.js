@@ -17,9 +17,16 @@ export const CurrentUserProvider = ({ children }) => {
   const handleMount = async () => {
     try {
       const { data } = await axiosRes.get("dj-rest-auth/user/");
-      setCurrentUser(data);
+      // Check if the profile_id property is available in the response data
+      if (data && data.profile_id) {
+        // Include the profile_id property in the currentUser object
+        setCurrentUser({ ...data, profile_id: data.profile_id });
+      } else {
+        setCurrentUser(data);
+      }
     } catch (err) {
-      // console.log(err);
+      // Handle error if necessary
+      console.error(err);
     }
   };
 
